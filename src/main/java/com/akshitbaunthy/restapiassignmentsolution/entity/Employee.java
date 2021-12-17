@@ -5,13 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "Employees")
+@Table(name = "Employee")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -19,12 +16,16 @@ import javax.persistence.Table;
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Employee_id")
-    private int employeeId;
+    private Long employeeId;
 
     @Column(name = "First_name")
     private String firstName;
 
     @Column(name = "Last_name")
     private String lastName;
+
+    @Column(name = "Email")
+    private String email;
 }

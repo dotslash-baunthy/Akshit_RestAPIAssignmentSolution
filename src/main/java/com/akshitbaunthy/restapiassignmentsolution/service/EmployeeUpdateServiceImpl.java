@@ -1,8 +1,32 @@
 package com.akshitbaunthy.restapiassignmentsolution.service;
 
-public class EmployeeUpdateServiceImpl implements EmployeeUpdateService{
+import com.akshitbaunthy.restapiassignmentsolution.entity.Employee;
+import com.akshitbaunthy.restapiassignmentsolution.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class EmployeeUpdateServiceImpl implements EmployeeUpdateService {
+
+    EmployeeRepository updateRepository;
+    EmployeeRepository readRepository;
+
+    @Autowired
+    private EmployeeUpdateServiceImpl(EmployeeRepository employeeRepository) {
+        this.updateRepository = employeeRepository;
+        this.readRepository = employeeRepository;
+    }
+
     @Override
-    public String updateById(Long id) {
-        return null;
+    public String updateById(Long id, Employee employee) {
+        Optional<Employee> fetchedEmployee = readRepository.findById(id);
+        Employee tempEmployee = fetchedEmployee.get();
+        tempEmployee.setEmail(employee.getEmail());
+        tempEmployee.setFirstName(employee.getFirstName());
+        tempEmployee.setLastName(employee.getLastName());
+        updateRepository.save(tempEmployee);
+        return "Employee with ID " + id + " has been updated";
     }
 }

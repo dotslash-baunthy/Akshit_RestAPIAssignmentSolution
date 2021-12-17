@@ -1,11 +1,15 @@
 package com.akshitbaunthy.restapiassignmentsolution.service;
 
+import com.akshitbaunthy.restapiassignmentsolution.entity.Employee;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface EmployeeReadService {
 
-    String getById(Long id);
-    String getAll();
+    Optional<Employee> getById(Long id);
+    List<Employee> getAll();
 
 }
