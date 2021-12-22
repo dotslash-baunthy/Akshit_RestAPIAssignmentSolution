@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface EmployeeDeleteService {
 
-    String deleteById(Long id);
-    String deleteAll();
+    void deleteById(Integer id);
+    void deleteAll();
 
 }

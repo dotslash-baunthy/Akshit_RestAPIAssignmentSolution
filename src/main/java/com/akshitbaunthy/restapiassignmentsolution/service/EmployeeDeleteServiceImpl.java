@@ -15,13 +15,12 @@ public class EmployeeDeleteServiceImpl implements EmployeeDeleteService {
     }
 
     @Override
-    public String deleteById(Long id) {
+    public void deleteById(Integer id) {
         deleteRepository.deleteById(id);
-        return "The Employee with ID " + id + " is no longer with the company.";
     }
 
     @Override
-    public String deleteAll() {
-        return "The company now has no employees";
+    public void deleteAll() {
+        deleteRepository.deleteAll();
     }
 }

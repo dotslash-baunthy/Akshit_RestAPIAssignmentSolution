@@ -9,7 +9,7 @@ import java.util.Optional;
 @Service
 public interface EmployeeReadService {
 
-    Optional<Employee> getById(Long id);
+    Optional<Employee> getById(Integer id);
     List<Employee> getAll();
 
 }

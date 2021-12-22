@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/update")
+@RequestMapping("/employee/update")
 public class EmployeeUpdateController {
 
     EmployeeUpdateService employeeUpdateService;
@@ -17,7 +17,7 @@ public class EmployeeUpdateController {
     }
 
     @PostMapping("/single")
-    public String updateById(@RequestParam Long id, @RequestBody Employee fetchedEmployee) {
+    public Employee updateById(@RequestParam Integer id, @RequestBody Employee fetchedEmployee) {
         return employeeUpdateService.updateById(id, fetchedEmployee);
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface EmployeeCreateService {
 
-    String addEmployee(Employee employee);
-    String addEmployees(List<Employee> employees);
+    Employee addEmployee(Employee employee);
+    List<Employee> addEmployees(List<Employee> employees);
 
 }

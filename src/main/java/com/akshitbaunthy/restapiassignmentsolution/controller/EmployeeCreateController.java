@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/create")
+@RequestMapping("/employee/create")
 public class EmployeeCreateController {
 
     EmployeeCreateService employeeCreateService;
@@ -22,12 +22,12 @@ public class EmployeeCreateController {
     }
 
     @PostMapping("/single")
-    public String addEmployee(@RequestBody Employee employee) {
+    public Employee addEmployee(@RequestBody Employee employee) {
         return employeeCreateService.addEmployee(employee);
     }
 
     @PostMapping("/bulk")
-    public String addEmployees(@RequestBody List<Employee> employees) {
+    public List<Employee> addEmployees(@RequestBody List<Employee> employees) {
         return employeeCreateService.addEmployees(employees);
     }
 }

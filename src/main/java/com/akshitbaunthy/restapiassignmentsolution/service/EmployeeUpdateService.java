@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface EmployeeUpdateService {
 
-    String updateById(Long id, Employee employee);
+    Employee updateById(Integer id, Employee employee);
 
 }

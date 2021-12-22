@@ -1,7 +1,6 @@
 package com.akshitbaunthy.restapiassignmentsolution.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,13 +11,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Employee_id")
-    private Long employeeId;
+    private Integer employeeId;
 
     @Column(name = "First_name")
     private String firstName;

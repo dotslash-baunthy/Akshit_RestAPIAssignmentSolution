@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/read")
+@RequestMapping("/employee/read")
 public class EmployeeReadController {
 
     EmployeeReadService employeeReadService;
@@ -20,7 +20,7 @@ public class EmployeeReadController {
     }
 
     @GetMapping("/single")
-    public Optional<Employee> getById(@RequestParam Long id) {
+    public Optional<Employee> getById(@RequestParam Integer id) {
         return employeeReadService.getById(id);
     }
 

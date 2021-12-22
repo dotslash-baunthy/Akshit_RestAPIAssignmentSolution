@@ -20,7 +20,7 @@ public class EmployeeReadServiceImpl implements EmployeeReadService {
     }
 
     @Override
-    public Optional<Employee> getById(Long id) {
+    public Optional<Employee> getById(Integer id) {
         return readRepository.findById(id);
     }
 

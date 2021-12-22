@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/delete")
+@RequestMapping("/employee/delete")
 public class EmployeeDeleteController {
 
     EmployeeDeleteService employeeDeleteService;
@@ -19,8 +19,8 @@ public class EmployeeDeleteController {
     }
 
     @GetMapping("/single")
-    public String deleteById(@RequestParam Long id) {
-        return employeeDeleteService.deleteById(id);
+    public void deleteById(@RequestParam Integer id) {
+        employeeDeleteService.deleteById(id);
     }
 
 }
