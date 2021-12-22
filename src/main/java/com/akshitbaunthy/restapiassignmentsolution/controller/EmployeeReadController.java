@@ -20,7 +20,7 @@ public class EmployeeReadController {
     }
 
     @GetMapping("/single")
-    public Optional<Employee> getById(Long id) {
+    public Optional<Employee> getById(@RequestParam Long id) {
         return employeeReadService.getById(id);
     }
 
