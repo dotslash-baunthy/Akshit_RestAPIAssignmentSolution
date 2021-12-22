@@ -27,7 +27,7 @@ public class EmployeeCreateController {
     }
 
     @PostMapping("/bulk")
-    public String addEmployees(List<Employee> employees) {
+    public String addEmployees(@RequestBody List<Employee> employees) {
         return employeeCreateService.addEmployees(employees);
     }
 }
