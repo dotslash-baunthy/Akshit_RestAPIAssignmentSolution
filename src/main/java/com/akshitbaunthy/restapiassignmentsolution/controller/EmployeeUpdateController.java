@@ -17,7 +17,7 @@ public class EmployeeUpdateController {
     }
 
     @PostMapping("/single")
-    public String updateById(Long id, @RequestBody Employee fetchedEmployee) {
+    public String updateById(@RequestParam Long id, @RequestBody Employee fetchedEmployee) {
         return employeeUpdateService.updateById(id, fetchedEmployee);
     }
 
