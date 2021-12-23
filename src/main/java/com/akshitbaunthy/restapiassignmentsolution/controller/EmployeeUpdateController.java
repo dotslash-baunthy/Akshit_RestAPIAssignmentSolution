@@ -3,6 +3,8 @@ package com.akshitbaunthy.restapiassignmentsolution.controller;
 import com.akshitbaunthy.restapiassignmentsolution.entity.Employee;
 import com.akshitbaunthy.restapiassignmentsolution.service.EmployeeUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,13 +14,14 @@ public class EmployeeUpdateController {
     EmployeeUpdateService employeeUpdateService;
 
     @Autowired
-    private EmployeeUpdateController (EmployeeUpdateService employeeUpdateService) {
+    private EmployeeUpdateController(EmployeeUpdateService employeeUpdateService) {
         this.employeeUpdateService = employeeUpdateService;
     }
 
     @PostMapping("/single")
-    public Employee updateById(@RequestParam Integer id, @RequestBody Employee fetchedEmployee) {
-        return employeeUpdateService.updateById(id, fetchedEmployee);
+    public ResponseEntity<Employee> updateById(@RequestParam Integer id, @RequestBody Employee fetchedEmployee) {
+        Employee updatedEmployee = employeeUpdateService.updateById(id, fetchedEmployee);
+        return new ResponseEntity<Employee>(updatedEmployee, HttpStatus.OK);
     }
 
 }

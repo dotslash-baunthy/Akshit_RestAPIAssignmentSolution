@@ -3,6 +3,8 @@ package com.akshitbaunthy.restapiassignmentsolution.controller;
 import com.akshitbaunthy.restapiassignmentsolution.entity.Employee;
 import com.akshitbaunthy.restapiassignmentsolution.service.EmployeeReadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,12 +22,14 @@ public class EmployeeReadController {
     }
 
     @GetMapping("/single")
-    public Optional<Employee> getById(@RequestParam Integer id) {
-        return employeeReadService.getById(id);
+    public ResponseEntity<Optional<Employee>> getById(@RequestParam Integer id) {
+        Optional<Employee> fetchedEmployee = employeeReadService.getById(id);
+        return new ResponseEntity<Optional<Employee>>(fetchedEmployee, HttpStatus.OK);
     }
 
     @GetMapping("/bulk")
-    public List<Employee> getAll() {
-        return employeeReadService.getAll();
+    public ResponseEntity<List<Employee>> getAll() {
+        List<Employee> fetchedEmployees = employeeReadService.getAll();
+        return new ResponseEntity<List<Employee>>(fetchedEmployees, HttpStatus.OK);
     }
 }
