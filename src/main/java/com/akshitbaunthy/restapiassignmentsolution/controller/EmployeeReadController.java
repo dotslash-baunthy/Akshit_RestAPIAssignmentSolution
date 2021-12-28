@@ -24,7 +24,12 @@ public class EmployeeReadController {
     @GetMapping("/single")
     public ResponseEntity<Optional<Employee>> getById(@RequestParam Integer id) {
         Optional<Employee> fetchedEmployee = employeeReadService.getById(id);
-        return new ResponseEntity<Optional<Employee>>(fetchedEmployee, HttpStatus.OK);
+        if (fetchedEmployee.isPresent()) {
+            return new ResponseEntity<Optional<Employee>>(fetchedEmployee, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/bulk")
