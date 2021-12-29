@@ -42,9 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/employee/delete/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.POST, "/employee/create/**", "/employee/update/single").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST, "/employee/create/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/employee/update/single").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers(HttpMethod.GET, "/employee/read/**").hasAnyAuthority("ADMIN", "USER")
-                .antMatchers(HttpMethod.POST, "/user/create/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST, "/user/create/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/role/create/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated().and().httpBasic()
                 .and().cors().and().csrf().disable();
         http.headers().frameOptions().disable();
