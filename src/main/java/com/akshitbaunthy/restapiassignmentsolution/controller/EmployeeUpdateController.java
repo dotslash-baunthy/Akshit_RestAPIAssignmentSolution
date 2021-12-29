@@ -21,8 +21,8 @@ public class EmployeeUpdateController {
         this.employeeUpdateService = employeeUpdateService;
     }
 
-    @PutMapping("/single")
-    public ResponseEntity<Employee> updateById(@RequestParam Integer id, @RequestBody Employee fetchedEmployee) {
+    @PutMapping("/single/{id}")
+    public ResponseEntity<Employee> updateById(@PathVariable Integer id, @RequestBody Employee fetchedEmployee) {
         Employee updatedEmployee = employeeUpdateService.updateById(id, fetchedEmployee);
         if (updatedEmployee != null) {
             return new ResponseEntity<Employee>(updatedEmployee, HttpStatus.OK);

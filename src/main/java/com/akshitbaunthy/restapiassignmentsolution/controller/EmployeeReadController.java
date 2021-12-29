@@ -22,8 +22,8 @@ public class EmployeeReadController {
         this.employeeReadService = employeeReadService;
     }
 
-    @GetMapping("/single")
-    public ResponseEntity<Optional<Employee>> getById(@RequestParam Integer id) {
+    @GetMapping("/single/{id}")
+    public ResponseEntity<Optional<Employee>> getById(@PathVariable Integer id) {
         Optional<Employee> fetchedEmployee = employeeReadService.getById(id);
         if (fetchedEmployee.isPresent()) {
             return new ResponseEntity<Optional<Employee>>(fetchedEmployee, HttpStatus.OK);
@@ -38,24 +38,20 @@ public class EmployeeReadController {
         return new ResponseEntity<List<Employee>>(fetchedEmployees, HttpStatus.OK);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<Employee>> search(@RequestParam Optional<String> order, @RequestParam Optional<String> firstName) {
-        if (firstName.isEmpty() && order.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    @GetMapping("/search/{firstName}")
+    public ResponseEntity<List<Employee>> search(@PathVariable String firstName) {
+        List<Employee> fetchedEmployees = employeeReadService.searchByFirstName(firstName);
+        return new ResponseEntity<List<Employee>>(fetchedEmployees, HttpStatus.OK);
+    }
+
+    @GetMapping("/sort")
+    public ResponseEntity<List<Employee>> sort(@RequestParam String order) {
+        List<Employee> fetchedEmployees;
+        if (order.toLowerCase().equals("desc")) {
+            fetchedEmployees = employeeReadService.searchByFirstNameAndOrderDesc();
         } else {
-            List<Employee> fetchedEmployees;
-            if (firstName.isEmpty()) {
-                if (order.get().toLowerCase().equals("asc")) {
-                    fetchedEmployees = employeeReadService.searchByFirstNameAndOrderAsc();
-                } else if (order.get().toLowerCase().equals("desc")) {
-                    fetchedEmployees = employeeReadService.searchByFirstNameAndOrderDesc();
-                } else {
-                    fetchedEmployees = employeeReadService.searchByFirstNameAndOrderAsc();
-                }
-            } else {
-                fetchedEmployees = employeeReadService.searchByFirstName(firstName.get());
-            }
-            return new ResponseEntity<>(fetchedEmployees, HttpStatus.OK);
+            fetchedEmployees = employeeReadService.searchByFirstNameAndOrderAsc();
         }
+        return new ResponseEntity<List<Employee>>(fetchedEmployees, HttpStatus.OK);
     }
 }

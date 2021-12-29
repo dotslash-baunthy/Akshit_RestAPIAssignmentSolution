@@ -24,8 +24,8 @@ public class EmployeeDeleteController {
         this.employeeReadService = employeeReadService;
     }
 
-    @DeleteMapping("/single")
-    public ResponseEntity<HttpStatus> deleteById(@RequestParam Integer id) {
+    @DeleteMapping("/single/{id}")
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable Integer id) {
         if (id != 0) {
             boolean isDeleted = employeeDeleteService.deleteById(id);
             if (isDeleted) {
