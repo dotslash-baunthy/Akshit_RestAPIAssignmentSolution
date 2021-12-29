@@ -14,21 +14,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee/create")
+// ServiceImpl does the actual job. The controller only exposes endpoints
 public class EmployeeCreateController {
 
     EmployeeCreateService employeeCreateService;
 
+//    Constructor injection
     @Autowired
     private EmployeeCreateController(EmployeeCreateService employeeCreateService) {
         this.employeeCreateService = employeeCreateService;
     }
 
+//    Create a single employee (body provided in REST API client)
     @PostMapping("/single")
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         Employee createdEmployee = employeeCreateService.addEmployee(employee);
         return new ResponseEntity<Employee>(createdEmployee, HttpStatus.OK);
     }
 
+//    Create multiple employees (body is an array of Employee objects, provided in REST API client)
     @PostMapping("/bulk")
     public ResponseEntity<List<Employee>> addEmployees(@RequestBody List<Employee> employees) {
         List<Employee> createdEmployees = employeeCreateService.addEmployees(employees);

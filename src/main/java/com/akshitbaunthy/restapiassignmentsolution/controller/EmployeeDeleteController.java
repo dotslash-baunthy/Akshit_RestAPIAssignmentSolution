@@ -13,31 +13,29 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/employee/delete")
+// ServiceImpl does the actual job. The controller only exposes endpoints
 public class EmployeeDeleteController {
 
     EmployeeDeleteService employeeDeleteService;
-    EmployeeReadService employeeReadService;
 
+    //    Constructor injection
     @Autowired
-    private EmployeeDeleteController(EmployeeDeleteService employeeDeleteService, EmployeeReadService employeeReadService) {
+    private EmployeeDeleteController(EmployeeDeleteService employeeDeleteService) {
         this.employeeDeleteService = employeeDeleteService;
-        this.employeeReadService = employeeReadService;
     }
 
+    //    Delete a single employee (ID provided as path variable)
     @DeleteMapping("/single/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable Integer id) {
-        if (id != 0) {
-            boolean isDeleted = employeeDeleteService.deleteById(id);
-            if (isDeleted) {
-                return null;
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+        boolean isDeleted = employeeDeleteService.deleteById(id);
+        if (isDeleted) {
+            return null;
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
+    //    Delete all employees
     @DeleteMapping("/bulk")
     public void deleteAll() {
         employeeDeleteService.deleteAll();

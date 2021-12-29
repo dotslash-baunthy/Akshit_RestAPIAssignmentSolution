@@ -31,11 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+//    Encrypt all passwords (provided in plain text using BCrypt
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(getMyUserDetailsService()).passwordEncoder(getPasswordEncoder());
     }
 
+//    Which person (based on role) has permission to access which API
+//    h2-console has been ignored for security via spring boot since it has its own security
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()

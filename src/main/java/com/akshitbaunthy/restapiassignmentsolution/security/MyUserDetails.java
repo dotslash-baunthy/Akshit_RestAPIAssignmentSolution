@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.akshitbaunthy.restapiassignmentsolution.entity.Role;
 import com.akshitbaunthy.restapiassignmentsolution.entity.User;
 
+// Security config that does the job of creating a simpleGrantedAuthority out of fetched user id, password and roles
 public class MyUserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
     private User user;

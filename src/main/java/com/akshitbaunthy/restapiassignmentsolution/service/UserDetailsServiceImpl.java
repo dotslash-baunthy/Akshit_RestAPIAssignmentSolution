@@ -14,14 +14,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetailsServiceImpl() {
     }
 
+    //    Field injection
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    UserDetailsServiceImpl(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-
+    //    Get user by username
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.getUserByUsername(username);

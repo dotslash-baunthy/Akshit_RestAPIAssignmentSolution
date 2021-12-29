@@ -9,24 +9,28 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// This service class does the actual user creation
 @Service
 public class UserCreateServiceImpl implements UserCreateService {
 
     UserRepository createRepository;
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    //    Constructor injection
     @Autowired
     private void userCreateService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.createRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    //    Add a single user
     @Override
     public User addUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return createRepository.save(user);
     }
 
+    //    Add users in bulk
     @Override
     public List<User> addUsers(List<User> users) {
         for (User user : users) {

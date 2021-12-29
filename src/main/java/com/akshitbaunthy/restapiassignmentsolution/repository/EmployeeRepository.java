@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
+//    Derived queries methods
+
     List<Employee> findByFirstNameContainsAllIgnoreCase(String firstName);
 
     List<Employee> findAllByOrderByFirstNameAsc();

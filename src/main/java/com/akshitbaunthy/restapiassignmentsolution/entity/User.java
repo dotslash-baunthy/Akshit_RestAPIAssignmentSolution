@@ -22,6 +22,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
+//    Many to many mapping between User and Role joined via respective IDs
+//    A temporary table called users_roles is created
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

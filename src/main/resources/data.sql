@@ -1,3 +1,6 @@
+-- Insert values into EMPLOYEE, ROLE, USER and USERS_ROLES tables
+-- USERS_ROLES table is a temporary table created due to the many to many relation between USER and ROLE tables
+
 INSERT INTO EMPLOYEE
 VALUES (1, 'akshit.baunthy@gmail.com', 'Akshit', 'Baunthiyal');
 INSERT INTO EMPLOYEE
