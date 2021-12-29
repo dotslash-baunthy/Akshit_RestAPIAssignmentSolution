@@ -37,18 +37,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/restapp/h2-console/**");
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.DELETE, "/restapp/employee/delete/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.POST, "/restapp/employee/create/**", "/restapp/employee/update/single").hasAnyAuthority("ADMIN", "USER")
-                .antMatchers(HttpMethod.GET, "/restapp/employee/read/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/employee/delete/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/employee/create/**", "/employee/update/single").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers(HttpMethod.GET, "/employee/read/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST, "/user/create/**").hasAnyAuthority("ADMIN", "USER")
                 .anyRequest().authenticated().and().httpBasic()
                 .and().cors().and().csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
 }
