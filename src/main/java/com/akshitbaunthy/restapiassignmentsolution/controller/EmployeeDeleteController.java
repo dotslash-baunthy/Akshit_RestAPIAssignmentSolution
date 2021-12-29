@@ -37,4 +37,9 @@ public class EmployeeDeleteController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @DeleteMapping("/bulk")
+    public void deleteAll() {
+        employeeDeleteService.deleteAll();
+    }
 }
