@@ -28,4 +28,19 @@ public class EmployeeReadServiceImpl implements EmployeeReadService {
     public List<Employee> getAll() {
         return readRepository.findAll();
     }
+
+    @Override
+    public List<Employee> searchByFirstName(String firstName) {
+        return readRepository.findByFirstNameContainsAllIgnoreCase(firstName);
+    }
+
+    @Override
+    public List<Employee> searchByFirstNameAndOrderAsc() {
+        return readRepository.findAllByOrderByFirstNameAsc();
+    }
+
+    @Override
+    public List<Employee> searchByFirstNameAndOrderDesc() {
+        return readRepository.findAllByOrderByFirstNameDesc();
+    }
 }
