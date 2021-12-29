@@ -15,22 +15,18 @@ import java.util.Optional;
 public class EmployeeUpdateController {
 
     EmployeeUpdateService employeeUpdateService;
-    EmployeeReadService employeeReadService;
 
     @Autowired
-    private EmployeeUpdateController(EmployeeUpdateService employeeUpdateService, EmployeeReadService employeeReadService) {
-        this.employeeReadService = employeeReadService;
+    private EmployeeUpdateController(EmployeeUpdateService employeeUpdateService) {
         this.employeeUpdateService = employeeUpdateService;
     }
 
     @PostMapping("/single")
     public ResponseEntity<Employee> updateById(@RequestParam Integer id, @RequestBody Employee fetchedEmployee) {
-        Optional<Employee> employeeInDatabase = employeeReadService.getById(id);
-        if(employeeInDatabase.isPresent()) {
-            Employee updatedEmployee = employeeUpdateService.updateById(id, fetchedEmployee);
+        Employee updatedEmployee = employeeUpdateService.updateById(id, fetchedEmployee);
+        if (updatedEmployee != null) {
             return new ResponseEntity<Employee>(updatedEmployee, HttpStatus.OK);
-        }
-        else {
+        } else {
             return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
         }
     }

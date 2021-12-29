@@ -27,12 +27,10 @@ public class EmployeeDeleteController {
     @DeleteMapping("/single")
     public ResponseEntity<HttpStatus> deleteById(@RequestParam Integer id) {
         if (id != 0) {
-            Optional<Employee> fetchedEmployee = employeeReadService.getById(id);
-            if(fetchedEmployee.isPresent()) {
-                employeeDeleteService.deleteById(id);
+            boolean isDeleted = employeeDeleteService.deleteById(id);
+            if (isDeleted) {
                 return null;
-            }
-            else {
+            } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } else {
