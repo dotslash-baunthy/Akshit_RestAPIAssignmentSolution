@@ -20,13 +20,17 @@ public class EmployeeUpdateServiceImpl implements EmployeeUpdateService {
     }
 
     @Override
-    public String updateById(Long id, Employee employee) {
+    public Employee updateById(Integer id, Employee employee) {
         Optional<Employee> fetchedEmployee = readRepository.findById(id);
-        Employee tempEmployee = fetchedEmployee.get();
-        tempEmployee.setEmail(employee.getEmail());
-        tempEmployee.setFirstName(employee.getFirstName());
-        tempEmployee.setLastName(employee.getLastName());
-        updateRepository.save(tempEmployee);
-        return "Employee with ID " + id + " has been updated";
+        if (fetchedEmployee.isPresent()) {
+            Employee tempEmployee = fetchedEmployee.get();
+            tempEmployee.setEmail(employee.getEmail());
+            tempEmployee.setFirstName(employee.getFirstName());
+            tempEmployee.setLastName(employee.getLastName());
+            updateRepository.save(tempEmployee);
+            return fetchedEmployee.get();
+        } else {
+            return null;
+        }
     }
 }

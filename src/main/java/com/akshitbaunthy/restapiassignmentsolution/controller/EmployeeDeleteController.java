@@ -1,25 +1,40 @@
 package com.akshitbaunthy.restapiassignmentsolution.controller;
 
+import com.akshitbaunthy.restapiassignmentsolution.entity.Employee;
 import com.akshitbaunthy.restapiassignmentsolution.service.EmployeeDeleteService;
+import com.akshitbaunthy.restapiassignmentsolution.service.EmployeeReadService;
+import com.akshitbaunthy.restapiassignmentsolution.service.EmployeeUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/delete")
+@RequestMapping("/employee/delete")
 public class EmployeeDeleteController {
 
     EmployeeDeleteService employeeDeleteService;
+    EmployeeReadService employeeReadService;
 
     @Autowired
-    private EmployeeDeleteController(EmployeeDeleteService employeeDeleteService) {
+    private EmployeeDeleteController(EmployeeDeleteService employeeDeleteService, EmployeeReadService employeeReadService) {
         this.employeeDeleteService = employeeDeleteService;
+        this.employeeReadService = employeeReadService;
     }
 
-    @GetMapping("/single")
-    public String deleteById(Long id) {
-        return employeeDeleteService.deleteById(id);
+    @DeleteMapping("/single/{id}")
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable Integer id) {
+        if (id != 0) {
+            boolean isDeleted = employeeDeleteService.deleteById(id);
+            if (isDeleted) {
+                return null;
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
-
 }

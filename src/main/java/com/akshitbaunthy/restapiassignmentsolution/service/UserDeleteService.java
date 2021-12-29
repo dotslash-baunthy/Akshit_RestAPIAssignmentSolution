@@ -3,9 +3,10 @@ package com.akshitbaunthy.restapiassignmentsolution.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface EmployeeDeleteService {
+public interface UserDeleteService {
 
-    boolean deleteById(Integer id);
+    void deleteById(Integer id);
+
     void deleteAll();
 
 }
