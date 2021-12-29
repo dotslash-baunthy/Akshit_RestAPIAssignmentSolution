@@ -21,7 +21,7 @@ public class EmployeeUpdateController {
         this.employeeUpdateService = employeeUpdateService;
     }
 
-    @PostMapping("/single")
+    @PutMapping("/single")
     public ResponseEntity<Employee> updateById(@RequestParam Integer id, @RequestBody Employee fetchedEmployee) {
         Employee updatedEmployee = employeeUpdateService.updateById(id, fetchedEmployee);
         if (updatedEmployee != null) {
