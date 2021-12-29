@@ -13,20 +13,18 @@ public class EmployeeCreateServiceImpl implements EmployeeCreateService {
     EmployeeRepository createRepository;
 
     @Autowired
-    private void employeeCreateService(EmployeeRepository employeeRepository) {
+    private EmployeeCreateServiceImpl(EmployeeRepository employeeRepository) {
         this.createRepository = employeeRepository;
     }
 
     @Override
     public List<Employee> addEmployees(List<Employee> employees) {
-        List<Employee> createdEmployees = createRepository.saveAllAndFlush(employees);
-        return createdEmployees;
+        return createRepository.saveAllAndFlush(employees);
     }
 
     @Override
     public Employee addEmployee(Employee employee) {
-        Employee createdEmployee = createRepository.saveAndFlush(employee);
-        return createdEmployee;
+        return createRepository.saveAndFlush(employee);
     }
 
 }
